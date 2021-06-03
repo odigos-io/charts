@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  keyval-operator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-03T14:53:03.180804149Z"
+    description: A Helm chart for Kubernetes
+    digest: 778692073f332cf690efa247c496b238ad622a5f79750ac6b9e1fdd077e525c6
+    name: keyval-operator
+    type: application
+    urls:
+    - https://github.com/keyval-dev/charts/releases/download/keyval-operator-0.1.0/keyval-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-06-03T14:53:03.180810149Z"
