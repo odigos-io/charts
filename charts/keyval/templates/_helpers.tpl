@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "keyval-operator.name" -}}
+{{- define "keyval.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "keyval-operator.fullname" -}}
+{{- define "keyval.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "keyval-operator.chart" -}}
+{{- define "keyval.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "keyval-operator.labels" -}}
-helm.sh/chart: {{ include "keyval-operator.chart" . }}
-{{ include "keyval-operator.selectorLabels" . }}
+{{- define "keyval.labels" -}}
+helm.sh/chart: {{ include "keyval.chart" . }}
+{{ include "keyval.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "keyval-operator.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "keyval-operator.name" . }}
+{{- define "keyval.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "keyval.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "keyval-operator.serviceAccountName" -}}
+{{- define "keyval.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "keyval-operator.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "keyval.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
