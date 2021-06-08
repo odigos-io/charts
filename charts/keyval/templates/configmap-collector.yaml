@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collector-conf
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: keyval-collector
+    component: collector-conf
+data:
+  collector-conf: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    exporters:
+      otlp:
+        endpoint: "{{ .Values.keyval.endpoint }}"
+        insecure: true
+        headers:
+          x-keyval-apikey: "{{ .Values.keyval.apikey }}"
+          x-scope-orgid: online-boutique
+    processors:
+      batch:
+        timeout: 15s
+      resourcedetection:
+        detectors: [env, system, eks]
+        timeout: 5s
+        override: false
+    extensions:
+      health_check: {}
+      zpages: {}
+    service:
+      extensions: [health_check, zpages]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [resourcedetection, batch]
+          exporters: [otlp]
