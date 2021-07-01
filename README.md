@@ -1,5 +1,5 @@
 # charts
 Install via: 
 ```shell script
-helm install --repo https://keyval-dev.github.io/charts keyval keyval --set keyval.apikey=12345 --namespace keyval-system --create-namespace
+KV_API_KEY="key"; helm install --repo https://keyval-dev.github.io/charts keyval keyval --set keyval.apikey=$KV_API_KEY --namespace keyval-system --create-namespace
 ```

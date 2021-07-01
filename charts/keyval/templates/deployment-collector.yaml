@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: keyval-collector
   namespace: {{ .Release.Namespace }}
+  annotations:
+    keyval.dev/skip: "true"
   labels:
     app: keyval-collector
     component: keyval-collector
