@@ -13,4 +13,4 @@ collector:
     tag: "latest"
 
 keyval:
-  endpoint: "gate.keyval-backend:4317"
+  endpoint: "gate.keyval.dev:4317"
