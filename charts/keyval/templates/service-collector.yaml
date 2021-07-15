@@ -13,6 +13,10 @@ spec:
       port: 55680
       protocol: TCP
       targetPort: 55680
+    - name: zipkin # Default endpoint for Zipkin receiver.
+      port: 9411
+      protocol: TCP
+      targetPort: 9411
     - name: metrics # Default endpoint for querying metrics.
       port: 8888
   selector:

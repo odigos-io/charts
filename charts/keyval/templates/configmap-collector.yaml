@@ -10,6 +10,7 @@ metadata:
 data:
   collector-conf: |
     receivers:
+      zipkin:
       otlp:
         protocols:
           grpc:
@@ -34,6 +35,6 @@ data:
       extensions: [health_check, zpages]
       pipelines:
         traces:
-          receivers: [otlp]
+          receivers: [otlp, zipkin]
           processors: [resourcedetection, batch]
           exporters: [otlp]
