@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keyval-collector
-  namespace: {{ .Release.Namespace }}
+  namespace: { { .Release.Namespace } }
   annotations:
     keyval.dev/skip: "true"
   labels:
@@ -38,11 +38,11 @@ spec:
               memory: 400Mi
           ports:
             - containerPort: 55679 # Default endpoint for ZPages.
-            - containerPort: 55680 # Default endpoint for OpenTelemetry receiver.
+            - containerPort: 4317 # Default endpoint for OpenTelemetry receiver.
             - containerPort: 14250 # Default endpoint for Jaeger HTTP receiver.
             - containerPort: 14268 # Default endpoint for Jaeger HTTP receiver.
             - containerPort: 9411 # Default endpoint for Zipkin receiver.
-            - containerPort: 8888  # Default endpoint for querying metrics.
+            - containerPort: 8888 # Default endpoint for querying metrics.
           volumeMounts:
             - name: collector-config-vol
               mountPath: /conf

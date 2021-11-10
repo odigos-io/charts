@@ -2,15 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-operator:
+controller:
   image:
-    repository: "edenfed/operator"
-    tag: "latest"
+    repository: "keyval/controller"
+    tag: "v0.0.1"
+  langDetectorVersion: "v0.0.1"
 
 collector:
   image:
-    repository: "otel/opentelemetry-collector-contrib"
-    tag: "latest"
+    repository: "keyval/collector"
+    tag: "v0.38.0"
 
 keyval:
   endpoint: "gate.keyval.dev:4317"

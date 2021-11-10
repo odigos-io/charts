@@ -10,9 +10,9 @@ metadata:
 spec:
   ports:
     - name: otlp # Default endpoint for OpenTelemetry receiver.
-      port: 55680
+      port: 4317
       protocol: TCP
-      targetPort: 55680
+      targetPort: 4317
     - name: zipkin # Default endpoint for Zipkin receiver.
       port: 9411
       protocol: TCP
