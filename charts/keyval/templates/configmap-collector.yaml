@@ -18,7 +18,6 @@ data:
     exporters:
       otlp:
         endpoint: "{{ .Values.keyval.endpoint }}"
-        insecure: true
         headers:
           x-keyval-apikey: "{{ .Values.keyval.apikey }}"
     processors:
