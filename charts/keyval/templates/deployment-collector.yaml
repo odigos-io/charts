@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keyval-collector
-  namespace: { { .Release.Namespace } }
+  namespace: {{ .Release.Namespace }}
   annotations:
     keyval.dev/skip: "true"
   labels:
