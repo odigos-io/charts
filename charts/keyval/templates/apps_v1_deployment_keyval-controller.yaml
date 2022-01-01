@@ -33,9 +33,18 @@ spec:
             - --metrics-bind-address=127.0.0.1:8080
             - --leader-elect
             - --lang-detector-version={{ .Values.controller.langDetectorVersion }}
+{{- if .Values.optInMode }}
+            - --opt-in
+{{- end }}
           command:
             - /manager
           image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
+          env:
+            - name: KV_API_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: keyval-manager-config
+                  key: api_key
           livenessProbe:
             httpGet:
               path: /healthz
