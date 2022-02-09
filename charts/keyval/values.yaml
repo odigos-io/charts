@@ -5,8 +5,8 @@
 controller:
   image:
     repository: "keyval/controller"
-    tag: "v0.0.67"
-  langDetectorVersion: "v0.0.2"
+    tag: "v0.0.694"
+  langDetectorVersion: "v0.0.244"
 
 collector:
   image:
