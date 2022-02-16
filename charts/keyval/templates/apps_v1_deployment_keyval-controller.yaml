@@ -36,6 +36,9 @@ spec:
 {{- if .Values.optInMode }}
             - --opt-in
 {{- end }}
+ {{- if not .Values.controller.deleteLangDetectionPods }}
+            - --delete-detection-pods=false
+{{- end }}
           command:
             - /manager
           image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"

@@ -5,8 +5,9 @@
 controller:
   image:
     repository: "keyval/controller"
-    tag: "v0.0.7"
-  langDetectorVersion: "v0.0.246"
+    tag: "v0.0.71"
+  langDetectorVersion: "v0.0.247"
+  deleteLangDetectionPods: true
 
 collector:
   image:
