@@ -3,6 +3,16 @@ entries:
   keyval:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-02-16T11:34:49.991835914Z"
+    description: A Helm chart for client-side Keyval applications.
+    digest: 4781a43c0e87716e4f68613b80cedc218f7d02865e4975d65c638102cb98d7a5
+    name: keyval
+    type: application
+    urls:
+    - https://github.com/keyval-dev/charts/releases/download/keyval-0.23/keyval-0.23.tgz
+    version: "0.23"
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-02-16T11:17:01.637095053Z"
     description: A Helm chart for client-side Keyval applications.
     digest: bfc281e14842c360cfbc37475a2a6c664cbf06095f9ded2ce5075caaf29f34f1
@@ -232,4 +242,4 @@ entries:
     urls:
     - https://github.com/keyval-dev/charts/releases/download/keyval-operator-0.1.0/keyval-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-16T11:17:01.637264357Z"
+generated: "2022-02-16T11:34:49.992339826Z"
