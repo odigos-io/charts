@@ -25,10 +25,6 @@ data:
     processors:
       batch:
         timeout: 15s
-      resourcedetection:
-        detectors: [env, system]
-        timeout: 5s
-        override: false
     extensions:
       health_check: {}
       zpages: {}
@@ -37,5 +33,5 @@ data:
       pipelines:
         traces:
           receivers: [otlp, zipkin]
-          processors: [resourcedetection, batch]
+          processors: [batch]
           exporters: [otlp]
