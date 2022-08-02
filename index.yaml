@@ -3,6 +3,16 @@ entries:
   keyval:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-08-02T04:48:46.501261481Z"
+    description: A Helm chart for client-side Keyval applications.
+    digest: afcec8fa9344c22b994156e4201a2f9883b9005140b879a6ecc407fdaa826851
+    name: keyval
+    type: application
+    urls:
+    - https://github.com/keyval-dev/charts/releases/download/keyval-0.31/keyval-0.31.tgz
+    version: "0.31"
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-04-19T09:51:55.828526823Z"
     description: A Helm chart for client-side Keyval applications.
     digest: 31f08a8ebc62030621b52e476234d415ae88592b5ea3077de992274bbe52002e
@@ -312,4 +322,28 @@ entries:
     urls:
     - https://github.com/keyval-dev/charts/releases/download/keyval-operator-0.1.0/keyval-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-19T09:51:55.828967229Z"
+  oss-observability:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-08-02T04:48:46.655122528Z"
+    dependencies:
+    - name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 15.11.0
+    - name: tempo
+      repository: https://grafana.github.io/helm-charts
+      version: 0.15.6
+    - name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: 2.13.3
+    - name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.32.9
+    description: A Helm chart for Kubernetes
+    digest: f810242be62eab49ab6888f4d7f5f7821b2677143107aeea8ac43e651f31dc51
+    name: oss-observability
+    type: application
+    urls:
+    - https://github.com/keyval-dev/charts/releases/download/oss-observability-0.1.0/oss-observability-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-08-02T04:48:46.655364031Z"
