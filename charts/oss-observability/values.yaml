@@ -1,0 +1,116 @@
+prometheus:
+  serverFiles:
+    prometheus.yml:
+      scrape_configs: []
+  rbac:
+    create: false
+  alertmanager:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  pushgateway:
+    enabled: false
+  server:
+    extraFlags:
+      - web.enable-lifecycle
+      - web.enable-remote-write-receiver
+      - enable-feature=exemplar-storage
+    deploymentAnnotations:
+      odigos.io/skip: "true"
+tempo:
+  annotations: 
+    odigos.io/skip: "true"
+  config: |
+    metrics_generator_enabled: true
+    search_enabled: true
+    multitenancy_enabled: {{ .Values.tempo.multitenancyEnabled }}
+    compactor:
+      compaction:
+        compacted_block_retention: {{ .Values.tempo.retention }}
+    distributor:
+      receivers:
+        {{- toYaml .Values.tempo.receivers | nindent 8 }}
+    ingester:
+      {{- toYaml .Values.tempo.ingester | nindent 6 }}
+    server:
+      {{- toYaml .Values.tempo.server | nindent 6 }}
+    storage:
+      {{- toYaml .Values.tempo.storage | nindent 6 }}
+    overrides:
+      per_tenant_override_config: /conf/overrides.yaml
+      metrics_generator_processors:
+        - service-graphs
+        - span-metrics
+    metrics_generator:
+      storage:
+        path: /var/tempo/wal
+        remote_write:
+          - url: http://observability-oss-prometheus-server.observability/api/v1/write
+            send_exemplars: true
+loki:
+  rbac:
+    pspEnabled: false
+  annotations:
+    odigos.io/skip: "true"
+grafana:
+  rbac:
+    pspEnabled: false
+  annotations:
+    odigos.io/skip: "true"
+  grafana.ini:
+    paths:
+      data: /var/lib/grafana/
+      logs: /var/log/grafana
+      plugins: /var/lib/grafana/plugins
+      provisioning: /etc/grafana/provisioning
+    analytics:
+      check_for_updates: true
+    log:
+      mode: console
+    grafana_net:
+      url: https://grafana.net
+    feature_toggles:
+      enable: tempoSearch, tempoBackendSearch
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://observability-oss-prometheus-server.observability
+        access: proxy
+        isDefault: true
+        jsonData:
+          httpMethod: POST
+          exemplarTraceIdDestinations:
+            - datasourceUid: Tempo
+              name: traceID
+      - name: Loki
+        type: loki
+        access: proxy
+        url: "http://observability-oss-loki.observability:3100"
+      - name: Tempo
+        type: tempo
+        access: proxy
+        url: "http://observability-oss-tempo.observability:3100"
+        jsonData:
+          httpMethod: GET
+          # tracesToLogs:
+          #   datasourceUid: 'loki'
+          #   tags: ['job', 'instance', 'pod', 'namespace']
+          #   mappedTags: [{ key: 'service.name', value: 'service' }]
+          #   mapTagNamesEnabled: false
+          #   spanStartTimeShift: '1h'
+          #   spanEndTimeShift: '1h'
+          #   filterByTraceID: false
+          #   filterBySpanID: false
+          serviceMap:
+            datasourceUid: 'Prometheus'
+          search:
+            hide: false
+          nodeGraph:
+            enabled: true
+          # lokiSearch:
+          #   datasourceUid: 'loki'
