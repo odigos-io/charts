@@ -47,7 +47,7 @@ tempo:
       storage:
         path: /var/tempo/wal
         remote_write:
-          - url: http://observability-oss-prometheus-server.observability/api/v1/write
+          - url: http://observability-prometheus-server.observability/api/v1/write
             send_exemplars: true
 loki:
   rbac:
