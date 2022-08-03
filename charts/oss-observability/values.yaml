@@ -79,7 +79,7 @@ grafana:
       datasources:
       - name: Prometheus
         type: prometheus
-        url: http://observability-oss-prometheus-server.observability
+        url: http://observability-prometheus-server.observability
         access: proxy
         isDefault: true
         jsonData:
@@ -90,11 +90,11 @@ grafana:
       - name: Loki
         type: loki
         access: proxy
-        url: "http://observability-oss-loki.observability:3100"
+        url: "http://observability-loki.observability:3100"
       - name: Tempo
         type: tempo
         access: proxy
-        url: "http://observability-oss-tempo.observability:3100"
+        url: "http://observability-tempo.observability:3100"
         jsonData:
           httpMethod: GET
           # tracesToLogs:
