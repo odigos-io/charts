@@ -79,6 +79,7 @@ grafana:
       datasources:
       - name: Prometheus
         type: prometheus
+        uid: Prometheus
         url: http://observability-prometheus-server.observability
         access: proxy
         isDefault: true
@@ -89,28 +90,40 @@ grafana:
               name: traceID
       - name: Loki
         type: loki
+        uid: Loki
         access: proxy
         url: "http://observability-loki.observability:3100"
+        correlations:
+        - targetUID: Tempo
+          label: "Tempo traces"
+          description: "Related traces stored in Tempo"
+        jsonData:
+          derivedFields:
+            - name: "traceID"
+              matcherRegex: "trace_id=(\\w+)"
+              url: "$${__value.raw}"
+              datasourceUid: Tempo
       - name: Tempo
         type: tempo
+        uid: Tempo
         access: proxy
         url: "http://observability-tempo.observability:3100"
         jsonData:
           httpMethod: GET
-          # tracesToLogs:
-          #   datasourceUid: 'loki'
-          #   tags: ['job', 'instance', 'pod', 'namespace']
-          #   mappedTags: [{ key: 'service.name', value: 'service' }]
-          #   mapTagNamesEnabled: false
-          #   spanStartTimeShift: '1h'
-          #   spanEndTimeShift: '1h'
-          #   filterByTraceID: false
-          #   filterBySpanID: false
+          tracesToLogs:
+            datasourceUid: 'Loki'
+            tags: ['k8s.pod.name']
+            mappedTags: [{ key: 'k8s.pod.name', value: 'k8s_pod_name' }]
+            mapTagNamesEnabled: true
+            spanStartTimeShift: '1h'
+            spanEndTimeShift: '1h'
+            filterByTraceID: true
+            filterBySpanID: false
           serviceMap:
             datasourceUid: 'Prometheus'
           search:
             hide: false
           nodeGraph:
             enabled: true
-          # lokiSearch:
-          #   datasourceUid: 'loki'
+          lokiSearch:
+            datasourceUid: 'Loki'
