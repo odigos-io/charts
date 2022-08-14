@@ -115,7 +115,7 @@ grafana:
             tags: ['k8s.pod.name']
             mappedTags: [{ key: 'k8s.pod.name', value: 'k8s_pod_name' }]
             mapTagNamesEnabled: true
-            spanStartTimeShift: '1h'
+            spanStartTimeShift: '-1h'
             spanEndTimeShift: '1h'
             filterByTraceID: true
             filterBySpanID: false
