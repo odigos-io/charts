@@ -325,6 +325,29 @@ entries:
   oss-observability:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-08-14T06:42:19.763119609Z"
+    dependencies:
+    - name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 15.11.0
+    - name: tempo
+      repository: https://grafana.github.io/helm-charts
+      version: 0.15.6
+    - name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: 2.13.3
+    - name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 6.32.9
+    description: A Helm chart for Kubernetes
+    digest: 13b7c6a6384e89555592b6b2fa1d71304b8ca24199c321bcce0fe8cb53b3de0b
+    name: oss-observability
+    type: application
+    urls:
+    - https://github.com/keyval-dev/charts/releases/download/oss-observability-0.1.4/oss-observability-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-08-10T12:37:28.963640248Z"
     dependencies:
     - name: prometheus
@@ -415,4 +438,4 @@ entries:
     urls:
     - https://github.com/keyval-dev/charts/releases/download/oss-observability-0.1.0/oss-observability-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-10T12:37:28.963862559Z"
+generated: "2022-08-14T06:42:19.76330261Z"
